@@ -4,14 +4,32 @@
 
 ## Install
 
+**Option A — interactive.** Inside a running Claude Code session (type these at the Claude Code prompt after launching `claude` — they are not shell commands):
+
 ```
 /plugin marketplace add silviuo/hve-claude
 /plugin install hve@hve-claude
 ```
 
-Restart the session (or start a new one) and the commands are available everywhere: `/rpi`, `/rpi-research`, `/git-commit`, `/security-review`, … See [HVE-COMMANDS.md](HVE-COMMANDS.md) for the full reference and cheat sheet.
+**Option B — declarative.** Add this to `~/.claude/settings.json` (no TUI needed; Claude Code fetches the marketplace and provisions the plugin on the next session start):
 
-> If you previously installed the standalone user-level version (files in `~/.claude/commands` and `~/.claude/agents`), remove those copies before installing the plugin, otherwise every command appears twice.
+```json
+{
+  "extraKnownMarketplaces": {
+    "hve-claude": {
+      "source": { "source": "github", "repo": "silviuo/hve-claude" },
+      "autoUpdate": true
+    }
+  },
+  "enabledPlugins": {
+    "hve@hve-claude": true
+  }
+}
+```
+
+Either way, start a new session and the commands are available everywhere: `/rpi`, `/rpi-research`, `/git-commit`, … (always also reachable namespaced: `/hve:rpi`). See [HVE-COMMANDS.md](HVE-COMMANDS.md) for the full reference and cheat sheet.
+
+> Notes: the `claude plugin` CLI has no `marketplace add`/`install` subcommands — use one of the two options above. If you previously installed the standalone user-level version (files in `~/.claude/commands` and `~/.claude/agents`), remove those copies before installing the plugin, otherwise every command appears twice and the user-level names shadow the plugin's.
 
 ## Update
 
