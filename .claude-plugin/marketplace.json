@@ -1,0 +1,19 @@
+{
+  "name": "hve-claude",
+  "owner": {
+    "name": "Silviu Obreja",
+    "url": "https://github.com/silviuo"
+  },
+  "metadata": {
+    "description": "Microsoft hve-core workflows converted for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "hve",
+      "source": "./",
+      "description": "Microsoft hve-core (Hypervelocity Engineering) workflows for Claude Code: RPI lifecycle, git & PR flows, security/supply-chain/RAI planning, design thinking, and backlog tooling — 80 commands and 58 agents.",
+      "category": "workflow"
+    }
+  ]
+}

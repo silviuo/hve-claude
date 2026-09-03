@@ -1,0 +1,40 @@
+name: Sync from microsoft/hve-core
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout plugin repo
+        uses: actions/checkout@v4
+
+      - name: Clone upstream hve-core
+        run: git clone --depth 1 https://github.com/microsoft/hve-core.git /tmp/hve-core
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Regenerate plugin content
+        run: python tools/convert_hve.py /tmp/hve-core --target plugin
+
+      - name: Commit and push if changed
+        run: |
+          if git diff --quiet && [ -z "$(git status --porcelain)" ]; then
+            echo "No upstream changes."
+            exit 0
+          fi
+          VERSION=$(python -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "sync: hve-core v${VERSION}"
+          git push
