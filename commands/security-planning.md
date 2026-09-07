@@ -1,5 +1,5 @@
 ---
-description: "Security planning reference set for operational buckets, STRIDE analysis, standards mapping, NIST control families, backlog scaffolding, and deterministic TM7 (.tm7) plus markdown dual-output generation."
+description: "Security planning and plan-drift analysis for STRIDE, standards, controls, backlog handoff, current findings, and TM7 generation."
 ---
 
 Execute the HVE skill **security-planning**.

@@ -1,6 +1,6 @@
 ---
 description: "Sequence Research, Plan, Implement, Review, and Follow-up for an RPI task. Use when one workflow should coordinate the full delivery lifecycle."
-argument-hint: "[task=...] [continue=...] [followUp=...]"
+argument-hint: "[task=...] [evidence=...] [continue=...] [followUp=...]"
 ---
 
 Execute the HVE skill **rpi-quick**.

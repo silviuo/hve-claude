@@ -1,6 +1,6 @@
 ---
 description: "Compare RPI planning and implementation evidence, record review findings, and route follow-up work. Use when an implementation needs acceptance review."
-argument-hint: "[task=...] [plan=...] [details=...] [changes=...]"
+argument-hint: "[task=...] [plan=...] [changes=...] [depth={standard|deep}]"
 ---
 
 Execute the HVE skill **rpi-review**.

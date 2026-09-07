@@ -1,6 +1,6 @@
 ---
-description: "Independently critique an RPI plan and phase details against supplied evidence without editing plan sources. Use when planning credibility needs a read-only assessment."
-argument-hint: "[plan=...] [details=...] [evidence=...] [output=...]"
+description: "Independently critique an RPI implementation plan once against supplied evidence without editing the plan. Use when planning credibility needs a read-only assessment."
+argument-hint: "[plan=...] [evidence=...] [output=...] [depth={standard|deep}]"
 ---
 
 Execute the HVE skill **rpi-plan-critique**.

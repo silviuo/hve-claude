@@ -60,12 +60,11 @@ See [Contributing Instructions](../../docs/contributing/instructions.md) for aut
 
 ### Git and Workflow
 
-| File                                                                               | Applies To                   | Purpose                               |
-|------------------------------------------------------------------------------------|------------------------------|---------------------------------------|
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md) | Commit actions               | Conventional commit message format    |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md)           | Git operations               | Merge, rebase, and conflict handling  |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/pull-request.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/pull-request.instructions.md)     | `**/.copilot-tracking/pr/**` | PR generation workflow with subagents |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md)                       | `**/.copilot-tracking/pr/**` | Repo-specific PR conventions          |
+| File                                                                               | Applies To                   | Purpose                              |
+|------------------------------------------------------------------------------------|------------------------------|--------------------------------------|
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md) | Commit actions               | Conventional commit message format   |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md)           | Git operations               | Merge, rebase, and conflict handling |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md)                       | `**/.copilot-tracking/pr/**` | HVE Core pull request conventions    |
 
 ### Repository Workflow
 
@@ -238,7 +237,6 @@ ${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/licensing-posture.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/markdown.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/hve-builder.instructions.md
-│   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md
 │   └── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/writing-style.instructions.md
 ├── privacy/                          # Privacy planning
 │   └── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/privacy/privacy-identity.instructions.md

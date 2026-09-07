@@ -46,7 +46,7 @@ Use `/rpi-research`, `/rpi-plan`, `/rpi-implement`, or `/rpi-review` when you ne
 
 ### Pull Requests & Code Review
 
-* **[Pull Request](${CLAUDE_PLUGIN_ROOT}/commands/pull-request.md)** - Generate pull request descriptions from branch diffs
+* **[Pull Request](../skills/hve-core/pull-request/SKILL.md)** - Prepare, create, or update a concise pull request with targeted preflight checks
 * **[PR Review](${CLAUDE_PLUGIN_ROOT}/commands/pr-review.md)** - Review a pull request or local change set via the consolidated Code Review agent
 
 ### Prompt Engineering & Evaluation
@@ -144,7 +144,7 @@ These workflows are skills rather than prompts. Each resolves the active tracker
 8. **Creating Azure DevOps PRs?** Use [ADO Create Pull Request](${CLAUDE_PLUGIN_ROOT}/commands/ado-create-pull-request.md)
 9. **Checking build status?** Use [ADO Get Build Info](${CLAUDE_PLUGIN_ROOT}/commands/ado-get-build-info.md)
 10. **Creating or updating tracker items?** Use the [Backlog Execute](../skills/project-planning/backlog-execute/SKILL.md) skill
-11. **Working on PRs?** Use [Pull Request](${CLAUDE_PLUGIN_ROOT}/commands/pull-request.md)
+11. **Working on PRs?** Use the [Pull Request](../skills/hve-core/pull-request/SKILL.md) skill
 12. **Responding to Azure incidents?** Use [Incident Response](${CLAUDE_PLUGIN_ROOT}/commands/incident-response.md)
 13. **Discovering or triaging a backlog?** Use the [Backlog Plan](../skills/project-planning/backlog-plan/SKILL.md) skill in `discover` or `triage` mode
 14. **Need GitLab delivery context?** Review the [GitLab Skill](../skills/project-planning/gitlab/SKILL.md) for setup and command guidance

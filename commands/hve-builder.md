@@ -1,6 +1,6 @@
 ---
-description: "Author, review, or validate Copilot prompt-engineering artifacts through independent review, behavior testing, and host checks."
-argument-hint: "[targets=...] [mode={create|improve|refactor|replace|review|validate}] [requirements=...]"
+description: "Create, improve, refactor, replace, review, or validate prompts, instructions, agents, subagents, and skills, and build or extend HVE workflows. Use when authoring or cleaning up Copilot customizations, deciding which instructions to keep or retire, or connecting an HVE workflow to project-specific knowledge, tools, or conventions."
+argument-hint: "[targets=...] [mode=create,improve,refactor] [requirements=...]"
 ---
 
 Execute the HVE skill **hve-builder**.
