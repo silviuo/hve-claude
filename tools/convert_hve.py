@@ -326,15 +326,33 @@ for s, p in sorted(agent_slugs.items()):
     agent_count += 1
 
 # ---------------------------------------------------------------- plugin version sync
+# Claude Code's plugin cache is keyed by version (cache/<mkt>/<plugin>/<version>/),
+# so the version MUST change whenever shipped content changes or installs stay
+# stale forever. The plugin version is therefore monotonic: it adopts the upstream
+# version when upstream's is newer, never goes backward, and the sync workflow
+# bumps the patch when content changed while the version did not. The upstream
+# hve-core version is recorded in metadata.upstreamVersion.
 upstream_version = None
 if args.target == "plugin":
     src_manifest = SRC / "plugin.json"
     manifest_path = DST / ".claude-plugin" / "plugin.json"
     if src_manifest.exists() and manifest_path.exists():
+        def sv(v):  # "3.2.2" / "3.3.0-rc1" -> (3, 2, 2) for ordering
+            try:
+                return tuple(int(x) for x in v.split("-")[0].split("."))
+            except ValueError:
+                return (0,)
         upstream_version = json.loads(src_manifest.read_text(encoding="utf-8")).get("version")
         manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-        if upstream_version and manifest.get("version") != upstream_version:
+        current = manifest.get("version", "0.0.0")
+        changed = False
+        if upstream_version and sv(upstream_version) > sv(current):
             manifest["version"] = upstream_version
+            changed = True
+        if upstream_version and manifest.setdefault("metadata", {}).get("upstreamVersion") != upstream_version:
+            manifest["metadata"]["upstreamVersion"] = upstream_version
+            changed = True
+        if changed:
             manifest_path.write_text(
                 json.dumps(manifest, indent=2, ensure_ascii=False) + "\n",
                 encoding="utf-8", newline="\n")

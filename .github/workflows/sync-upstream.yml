@@ -32,9 +32,24 @@ jobs:
             echo "No upstream changes."
             exit 0
           fi
-          VERSION=$(python -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          # Claude Code's plugin cache is keyed by version: if content changed but
+          # the version did not, bump the patch so installs actually update.
+          OLD_VERSION=$(git show HEAD:.claude-plugin/plugin.json | python -c "import json,sys;print(json.load(sys.stdin)['version'])")
+          NEW_VERSION=$(python -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          if [ "$NEW_VERSION" = "$OLD_VERSION" ]; then
+            python - <<'EOF'
+          import json
+          p = ".claude-plugin/plugin.json"
+          m = json.load(open(p, encoding="utf-8"))
+          a, b, c = (m["version"].split("-")[0].split("."))
+          m["version"] = f"{a}.{b}.{int(c) + 1}"
+          open(p, "w", encoding="utf-8", newline="\n").write(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
+          EOF
+            NEW_VERSION=$(python -c "import json;print(json.load(open('.claude-plugin/plugin.json'))['version'])")
+          fi
+          UPSTREAM=$(python -c "import json;m=json.load(open('.claude-plugin/plugin.json'));print(m.get('metadata',{}).get('upstreamVersion','?'))")
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add -A
-          git commit -m "sync: hve-core v${VERSION}"
+          git commit -m "sync: hve-core ${UPSTREAM} (plugin v${NEW_VERSION})"
           git push

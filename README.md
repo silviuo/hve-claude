@@ -33,7 +33,7 @@ Either way, start a new session and the commands are available everywhere: `/rpi
 
 ## Update
 
-A scheduled GitHub Action ([sync-upstream.yml](.github/workflows/sync-upstream.yml)) re-converts from upstream hve-core every Monday (and on manual dispatch), commits the result, and syncs the plugin version to upstream's. Your Claude Code picks it up via the plugin system:
+A scheduled GitHub Action ([sync-upstream.yml](.github/workflows/sync-upstream.yml)) re-converts from upstream hve-core every Monday (and on manual dispatch) and commits the result. The plugin version always changes when content changes — Claude Code's plugin cache is keyed by version, so a content-only sync would otherwise never reach installed copies. Versioning is monotonic: upstream's version is adopted when it is newer, the patch is bumped when content changed without an upstream release, and the exact upstream version is recorded in `plugin.json` → `metadata.upstreamVersion`. Your Claude Code picks updates up via the plugin system:
 
 ```
 /plugin marketplace update hve-claude
