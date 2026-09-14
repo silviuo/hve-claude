@@ -1,5 +1,5 @@
 ---
-description: "Run one complete black-box behavior test of a prompt, instruction, agent, subagent, or skill with explicit fidelity and independent grading. Use as the final behavior gate after hve-builder freezes a candidate, or directly to test an existing artifact without changing it."
+description: "Assess a frozen prompt, instruction, agent, subagent, or skill through black-box behavior testing with explicit fidelity and independent grading. Use for hve-builder candidate assessment and reassessment after corrections, or to test an existing artifact without editing it."
 argument-hint: "[targets=...] [types=...] [profile={high|medium|low}] [fidelity={simulation|native}] [purpose=...] [retain-sandbox]"
 ---
 

@@ -1,5 +1,5 @@
 ---
-description: "Create, improve, refactor, replace, review, or validate prompts, instructions, agents, subagents, and skills, and build or extend HVE workflows. Use when authoring or cleaning up Copilot customizations, deciding which instructions to keep or retire, or connecting an HVE workflow to project-specific knowledge, tools, or conventions."
+description: "Create, improve, refactor, replace, review, or validate prompts, instructions, agents, subagents, and skills. Use for Copilot customization cleanup, extending HVE workflows with project-specific capabilities, and parent-owned correction of material review or behavior-test findings."
 argument-hint: "[targets=...] [mode=create,improve,refactor] [requirements=...]"
 ---
 

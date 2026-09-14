@@ -1,6 +1,6 @@
 {
   "name": "hve",
-  "version": "3.2.3",
+  "version": "3.2.4",
   "description": "Microsoft hve-core (Hypervelocity Engineering) workflows for Claude Code: the RPI lifecycle (research/plan/implement/review), git & PR flows, security/supply-chain/RAI planning, design thinking, and backlog tooling — 80 commands and 58 agents converted from the GitHub Copilot format.",
   "author": {
     "name": "Silviu Obreja",
