@@ -1,5 +1,5 @@
 ---
-description: "Independently critique an RPI implementation plan once against supplied evidence without editing the plan. Use when planning credibility needs a read-only assessment."
+description: "Independently assess an RPI plan against supplied evidence without editing it. Use for a current initial or planner-authorized recovery critique run."
 argument-hint: "[plan=...] [evidence=...] [output=...] [depth={standard|deep}]"
 ---
 

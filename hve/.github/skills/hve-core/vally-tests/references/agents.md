@@ -74,7 +74,7 @@ Grader identifiers below use the Vally CLI 0.9.0 catalog (`semantic_similarity`,
   * A Response Format section that defines the structured return to the parent.
 * Suggested stimulus: ask the assistant to summarize the section structure of a named subagent and to confirm that the H1 matches the frontmatter name.
 * Grader recommendation: `regex` with pattern `(?m)^#\s+\S` AND `(?m)^##\s+Purpose\b` AND `(?m)^##\s+Inputs\b` AND `(?m)^##\s+Required\s+Steps\b` AND `(?m)^##\s+Response\s+Format\b`.
-* Evidence: the delegated-task contract in `${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/hve-builder.instructions.md`, Delegate Deliberately; `${CLAUDE_PLUGIN_ROOT}/agents/hve-artifact-tester.md` follows the subagent structure.
+* Evidence: the delegated-task contract in `${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/hve-builder.instructions.md`, Delegate Deliberately; `${CLAUDE_PLUGIN_ROOT}/agents/code-review-functional.md` follows the subagent structure.
 
 ### Check 6: Handoff Pattern Structure
 
@@ -90,7 +90,7 @@ Grader identifiers below use the Vally CLI 0.9.0 catalog (`semantic_similarity`,
 * Testable behavior: when an agent declares `tools:`, the value MUST be a list of valid tool identifiers available in this VS Code context. When the `tools:` field is omitted, the agent inherits the default tool set.
 * Suggested stimulus: ask the assistant which tools a named agent restricts itself to and why those tools fit its purpose.
 * Grader recommendation: `semantic_similarity` with rubric "Are the declared tools valid identifiers from the VS Code tool surface, and is the restriction set appropriate for the agent's stated purpose?".
-* Evidence: a subagent under `${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/**/subagents/` such as `${CLAUDE_PLUGIN_ROOT}/agents/hve-artifact-tester.md` shows the `tools:` field shape.
+* Evidence: a subagent under `${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/**/subagents/` such as `${CLAUDE_PLUGIN_ROOT}/agents/rpi-researcher.md` shows the `tools:` field shape.
 
 ### Check 8: Subagent Invocation by Human-Readable Name
 

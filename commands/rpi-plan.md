@@ -1,6 +1,6 @@
 ---
-description: "Create one evidence-based RPI implementation plan from supplied context, research, drafts, and decisions. Use when implementation planning is needed."
-argument-hint: "[task=...] [research=...] [context=...] [draft=...] [decisions=...] [delegation={adaptive|never|always}] [critique={standard|deep}]"
+description: "Create or resume an evidence-based RPI implementation plan. Use for planning from supplied context or reconciling an interrupted planning critique."
+argument-hint: "[task=...] [research=...] [context=...] [draft=...] [decisions=...] [critique={standard|deep}]"
 ---
 
 Execute the HVE skill **rpi-plan**.

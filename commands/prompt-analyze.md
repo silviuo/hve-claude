@@ -1,5 +1,5 @@
 ---
-description: "Compatibility alias for read-only prompt artifact review. Routes static and behavior analysis to hve-builder review mode."
+description: "Compatibility alias for read-only prompt artifact review. Routes review to hve-builder review mode."
 argument-hint: "[promptFiles=...] [requirements=...]"
 ---
 

@@ -1,6 +1,6 @@
 ---
 description: "Research-only RPI playbook that gathers task evidence, writes dated research artifacts under .copilot-tracking/research/, and hands off planning-ready findings. Use when the user needs evidence, alternatives, or task framing first."
-argument-hint: "[topic=...] [chat]"
+argument-hint: "[topic=...] [posture={balanced|focused|expansive}] [chat]"
 ---
 
 Execute the HVE skill **rpi-research**.

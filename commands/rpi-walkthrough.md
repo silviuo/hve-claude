@@ -1,5 +1,5 @@
 ---
-description: "Guided, conversational walkthrough that explains code, UI, UX, features, or .copilot-tracking artifacts with navigable evidence links, deep subagent review, and a reconciled decisions-and-changes ledger. Use when the user wants to understand how something works or why it was changed."
+description: "Guided, conversational walkthrough that explains code, UI, UX, features, or .copilot-tracking artifacts with navigable evidence links, a deep review before explaining, and a reconciled decisions-and-changes ledger. Use when the user wants to understand how something works or why it was changed."
 argument-hint: "[target=...] [detail={brief|normal|deep}] [chat]"
 ---
 
