@@ -1,6 +1,6 @@
 ---
 description: "Start a new Design Thinking coaching project with state initialization and first coaching interaction"
-argument-hint: "project-slug=... [context=...] [stakeholders=...] [industry=...]"
+argument-hint: "[project-slug=...] [context=...] [stakeholders=...] [industry=...]"
 ---
 
 Adopt the **DT Coach** agent for this command: first Read `${CLAUDE_PLUGIN_ROOT}/agents/dt-coach.md` and follow its goal, success criteria, guidance, and state contract while executing the request below. Where it delegates work to named subagents, launch them with the Agent tool using the matching agent name.
@@ -12,7 +12,7 @@ Adopt the **DT Coach** agent for this command: first Read `${CLAUDE_PLUGIN_ROOT}
 
 ## Inputs
 
-* <project-slug>: (Required) Kebab-case project identifier for the artifact directory (e.g., `factory-floor-maintenance`).
+* <project-slug>: (Optional) Project identifier for the artifact directory. When omitted, derive it from the supplied context or ask for a short project name.
 * <context>: (Optional) Initial project context, problem statement, or customer request to capture.
 * <stakeholders>: (Optional) Known stakeholder groups or key contacts to include in initial mapping.
 * <industry>: (Optional) Industry or domain context (e.g., manufacturing, healthcare, finance) to inform coaching vocabulary and constraint patterns.

@@ -1,6 +1,6 @@
 ---
 description: "VEX generation rules: evidence requirements, confidence routing, forbidden transitions, report templates, and licensing posture for AI-assisted vulnerability triage - Brought to you by microsoft/hve-core"
-applyTo: '${CLAUDE_PLUGIN_ROOT}/agents/sssc-reviewer.md, ${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/security/subagents/cve-*.agent.md'
+applyTo: '**${CLAUDE_PLUGIN_ROOT}/agents/sssc-reviewer.md, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/security/subagents/cve-*.agent.md'
 ---
 
 # VEX Generation Instructions

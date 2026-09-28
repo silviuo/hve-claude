@@ -6,7 +6,7 @@ description: Lightweight guidance for documentation conventions and source-of-tr
 # Conventions
 
 Use this reference as the lightweight entry point for documentation conventions.
-For the detailed source of truth, follow the repository instructions:
+For the detailed source of truth, follow these automatically applied repository instructions:
 
 - `${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/markdown.instructions.md`
 - `${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/writing-style.instructions.md`

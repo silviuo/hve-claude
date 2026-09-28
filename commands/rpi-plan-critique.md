@@ -1,5 +1,5 @@
 ---
-description: "Independently assess an RPI plan against supplied evidence without editing it. Use for a current initial or planner-authorized recovery critique run."
+description: "Independently assess an RPI plan without editing it. Use for an initial critique, revision-bound closure, or planner-authorized recovery including infrastructure retry."
 argument-hint: "[plan=...] [evidence=...] [output=...] [depth={standard|deep}]"
 ---
 
