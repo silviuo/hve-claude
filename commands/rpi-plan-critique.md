@@ -1,6 +1,6 @@
 ---
-description: "Independently assess an RPI plan without editing it. Use for an initial critique, revision-bound closure, or planner-authorized recovery including infrastructure retry."
-argument-hint: "[plan=...] [evidence=...] [output=...] [depth={standard|deep}]"
+description: "Independently assess an RPI plan without editing it. Use when an implementation-ready plan needs a credibility check or a revised plan needs its earlier findings reconciled."
+argument-hint: "[plan=...] [evidence=...] [output=...] [depth={standard|deep}] [prior=...]"
 ---
 
 Execute the HVE skill **rpi-plan-critique**.

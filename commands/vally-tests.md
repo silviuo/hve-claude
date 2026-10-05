@@ -1,5 +1,5 @@
 ---
-description: "Authors Vally conformance tests for prompts, instructions, agents, and skills, including refusals for jailbreak, prompt-injection, harmful-elicitation, TOS, CoC, and PII-extraction stimuli"
+description: "Authors Vally conformance tests for prompts, instructions, agents, and skills, and refuses jailbreak, prompt-injection, harmful-elicitation, TOS, CoC, and PII-extraction stimuli"
 ---
 
 Execute the HVE skill **vally-tests**.

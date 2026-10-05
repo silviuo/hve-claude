@@ -1,6 +1,6 @@
 ---
-description: "Create or resume an evidence-based RPI implementation plan. Use for planning, interrupted critiques, or bounded critique infrastructure recovery."
-argument-hint: "[task=...] [research=...] [context=...] [draft=...] [decisions=...] [critique={standard|deep}]"
+description: "Create or resume an evidence-based RPI implementation plan with an optional independent critique. Use when a task needs an implementation plan or an existing plan needs revision."
+argument-hint: "[task=...] [research=...] [context=...] [draft=...] [decisions=...] [critique={standard|deep|skip}]"
 ---
 
 Execute the HVE skill **rpi-plan**.

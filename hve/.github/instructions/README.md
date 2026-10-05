@@ -2,7 +2,7 @@
 title: GitHub Copilot Instructions
 description: Repository-specific coding guidelines and conventions for GitHub Copilot
 author: HVE Core Team
-ms.date: 2026-09-11
+ms.date: 2026-10-02
 ms.topic: reference
 keywords:
   - copilot
@@ -68,12 +68,13 @@ See [Contributing Instructions](../../docs/contributing/instructions.md) for aut
 
 ### Repository Workflow
 
-| File                                                                                     | Applies To                              | Purpose                                          |
-|------------------------------------------------------------------------------------------|-----------------------------------------|--------------------------------------------------|
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking.instructions.md)   | `.copilot-tracking/**`                  | Intermediate tracking artifact conventions       |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/licensing-posture.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/licensing-posture.instructions.md) | `**/skills/**, **/.copilot-tracking/**` | Licensing, reproduction, and attribution posture |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/skill-security-model.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/skill-security-model.instructions.md)             | `**/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/**/SECURITY.md`      | Per-skill STRIDE security model rules            |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/workflows.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/workflows.instructions.md)                                   | `**/.github/workflows/*.yml`            | GitHub Actions workflow conventions              |
+| File                                                                                                     | Applies To                                               | Purpose                                          |
+|----------------------------------------------------------------------------------------------------------|----------------------------------------------------------|--------------------------------------------------|
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking.instructions.md)                   | RPI, HVE Builder, and proposal-response tracking folders | Intermediate tracking artifact conventions       |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking-location.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking-location.instructions.md) | `**/.copilot-tracking/**`                                | Tracking root and ignored-file search            |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/licensing-posture.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/licensing-posture.instructions.md)                 | `**/skills/**, **/.copilot-tracking/**`                  | Licensing, reproduction, and attribution posture |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/skill-security-model.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/skill-security-model.instructions.md)                             | Skill `SECURITY.md`, skill scripts, classification JSON  | Per-skill STRIDE security model rules            |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/workflows.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/workflows.instructions.md)                                                   | `**/.github/workflows/*.yml`                             | GitHub Actions workflow conventions              |
 
 ### GitHub Integration
 
@@ -126,23 +127,21 @@ The instructions below are scoped to specific planning agents and their `.copilo
 
 #### Shared Planner Scaffolds
 
-| File                                                                                                   | Applies To                                                         | Purpose                                           |
-|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|---------------------------------------------------|
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/hve-core-location.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/hve-core-location.instructions.md)                   | `**`                                                               | Fallback location guidance for hve-core artifacts |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/content-policy-citation.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/content-policy-citation.instructions.md)       | `**/*.agent.md, **/*.prompt.md, **/*.instructions.md, **/SKILL.md` | Content-policy and terms-of-service guardrails    |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/coaching-patterns.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/coaching-patterns.instructions.md)                   | Planning agents                                                    | Exploration-first coaching patterns               |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/planner-identity-base.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/planner-identity-base.instructions.md)           | Planning agents                                                    | Shared planner identity scaffold                  |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md)               | Planning and review agents                                         | Professional-review disclaimer language           |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/telemetry-overlay.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/telemetry-overlay.instructions.md)                   | Planning and review agents                                         | Telemetry vocabulary overlay                      |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/untrusted-content-boundary.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/untrusted-content-boundary.instructions.md) | Planning and DT/UX agents                                          | Untrusted-content boundary rules                  |
+| File                                                                                                   | Applies To                                                         | Purpose                                        |
+|--------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------|------------------------------------------------|
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/content-policy-citation.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/content-policy-citation.instructions.md)       | `**/*.agent.md, **/*.prompt.md, **/*.instructions.md, **/SKILL.md` | Content-policy and terms-of-service guardrails |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/coaching-patterns.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/coaching-patterns.instructions.md)                   | Planning agents                                                    | Exploration-first coaching patterns            |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/planner-identity-base.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/planner-identity-base.instructions.md)           | Planning agents                                                    | Shared planner identity scaffold               |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md)               | Planning and review agents                                         | Professional-review disclaimer language        |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/telemetry-overlay.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/telemetry-overlay.instructions.md)                   | Planning and review agents                                         | Telemetry vocabulary overlay                   |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/untrusted-content-boundary.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/untrusted-content-boundary.instructions.md) | Planning and DT/UX agents                                          | Untrusted-content boundary rules               |
 
 #### Experimental
 
-| File                                                                                                 | Applies To                    | Purpose                                       |
-|------------------------------------------------------------------------------------------------------|-------------------------------|-----------------------------------------------|
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/experiment-designer.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/experiment-designer.instructions.md) | `**/.copilot-tracking/mve/**` | MVE experiment designer conventions           |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/graphify.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/graphify.instructions.md)                       | `**/graphify-out/**`          | Graphify knowledge-graph evidence conventions |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/pptx.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/pptx.instructions.md)                               | `**/.copilot-tracking/ppt/**` | PowerPoint builder conventions                |
+| File                                                                                                 | Applies To                    | Purpose                             |
+|------------------------------------------------------------------------------------------------------|-------------------------------|-------------------------------------|
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/experiment-designer.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/experiment-designer.instructions.md) | `**/.copilot-tracking/mve/**` | MVE experiment designer conventions |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/pptx.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/pptx.instructions.md)                               | `**/.copilot-tracking/ppt/**` | PowerPoint builder conventions      |
 
 The `experimental/mural/` directory holds the Mural workflow instruction set (bootstrap, seeding, writeback, and log-hygiene rules) scoped to the DT, RAI, and UX/UI agents; see [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/mural/mural-bootstrap.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/mural/mural-bootstrap.instructions.md) as the entry point.
 
@@ -228,11 +227,11 @@ ${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/
 │   │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/mural/mural-writeback-hygiene.instructions.md
 │   │   └── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/mural/mural-writing-style.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/experiment-designer.instructions.md
-│   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/graphify.instructions.md
 │   └── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/experimental/pptx.instructions.md
 ├── hve-core/                         # HVE Core workflow
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking.instructions.md
+│   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/copilot-tracking-location.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/licensing-posture.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/markdown.instructions.md
@@ -259,7 +258,6 @@ ${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/coaching-patterns.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/content-policy-citation.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md
-│   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/hve-core-location.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/planner-identity-base.instructions.md
 │   ├── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/telemetry-overlay.instructions.md
 │   └── ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/untrusted-content-boundary.instructions.md
