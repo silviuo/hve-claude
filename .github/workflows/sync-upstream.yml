@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout plugin repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Clone upstream hve-core
         run: git clone --depth 1 https://github.com/microsoft/hve-core.git /tmp/hve-core
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v7
         with:
           python-version: "3.12"
 
