@@ -1,6 +1,6 @@
 # hve-claude — Microsoft hve-core workflows as a Claude Code plugin
 
-[microsoft/hve-core](https://github.com/microsoft/hve-core) ("Hypervelocity Engineering") is Microsoft's agentic SDLC framework built for GitHub Copilot. This repo converts its full command set to Claude Code and packages it as an installable, updatable **plugin**: 80 slash commands (the RPI lifecycle, git & PR flows, security / supply-chain / RAI planning, design thinking, backlog tooling) plus 58 subagents.
+[microsoft/hve-core](https://github.com/microsoft/hve-core) ("Hypervelocity Engineering") is Microsoft's agentic SDLC framework built for GitHub Copilot. This repo converts its full command set to Claude Code and packages it as an installable, updatable **plugin**: slash commands (the RPI lifecycle, git & PR flows, security references, backlog tooling, UX and authoring tools) plus subagents (including the security / supply-chain / RAI planners and reviewers and the Design Thinking coach).
 
 ## Install
 
@@ -27,7 +27,7 @@
 }
 ```
 
-Either way, start a new session and the commands are available everywhere: `/rpi`, `/rpi-research`, `/git-commit`, … (always also reachable namespaced: `/hve:rpi`). See [HVE-COMMANDS.md](HVE-COMMANDS.md) for the full reference and cheat sheet.
+Either way, start a new session and the commands are available everywhere: `/rpi-research`, `/rpi-plan`, `/git-commit`, … (always also reachable namespaced: `/hve:rpi-plan`). See [HVE-COMMANDS.md](HVE-COMMANDS.md) for the full reference and cheat sheet.
 
 > Notes: the `claude plugin` CLI has no `marketplace add`/`install` subcommands — use one of the two options above. If you previously installed the standalone user-level version (files in `~/.claude/commands` and `~/.claude/agents`), remove those copies before installing the plugin, otherwise every command appears twice and the user-level names shadow the plugin's.
 
@@ -47,9 +47,9 @@ or — for the full VS Code-extension experience — enable auto-update for this
 |---|---|
 | `.claude-plugin/plugin.json` | Plugin manifest (version tracks upstream hve-core) |
 | `.claude-plugin/marketplace.json` | Makes this repo its own one-plugin marketplace |
-| `commands/` | 80 generated slash commands |
-| `agents/` | 58 generated subagents |
-| `hve/` | Pristine mirror of hve-core's skills / instructions / prompts / agents trees + key docs — commands read playbooks, references, and templates from here |
+| `commands/` | Generated slash commands, one per user-invocable hve skill |
+| `agents/` | Generated subagents, one per hve agent |
+| `hve/` | Pristine mirror of hve-core's skills / instructions / agents trees + key docs — commands read playbooks, references, and templates from here |
 | `tools/convert_hve.py` | The converter (see below) |
 | `HVE-COMMANDS.md` | Full command reference + cheat sheet |
 
@@ -67,7 +67,7 @@ python tools/convert_hve.py /path/to/hve-core --target plugin
 python tools/convert_hve.py /path/to/hve-core --target user
 ```
 
-Conversion highlights: Copilot `${input:x}` variables become `$ARGUMENTS` parsing notes; `#file:` directives are stripped; prompt→agent bindings become "read and follow this agent spec" pointers; every cross-reference between prompts, skills, agents, and instruction files is rewritten to its installed location (`${CLAUDE_PLUGIN_ROOT}/…` for the plugin target, `~/.claude/…` for the user target); adapter notes tell Claude where skill playbooks live, since Claude does not auto-load Copilot skills by name.
+Conversion highlights: Copilot `${input:x}` variables become `$ARGUMENTS` parsing notes; `#file:` directives are stripped; user-invocable skills become "read and follow this SKILL.md" commands; every cross-reference between skills, agents, and instruction files is rewritten to its installed location (`${CLAUDE_PLUGIN_ROOT}/…` for the plugin target, `~/.claude/…` for the user target); adapter notes tell Claude where skill playbooks live, since Claude does not auto-load Copilot skills by name. Upstream retired its prompt files on 2026-10-07; [HVE-COMMANDS.md](HVE-COMMANDS.md#retired-commands) maps each command that left with them to its replacement.
 
 ## Attribution & license
 

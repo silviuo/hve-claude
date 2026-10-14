@@ -12,7 +12,7 @@
     {
       "name": "hve",
       "source": "./",
-      "description": "Microsoft hve-core (Hypervelocity Engineering) workflows for Claude Code: RPI lifecycle, git & PR flows, security/supply-chain/RAI planning, design thinking, and backlog tooling — 80 commands and 58 agents.",
+      "description": "Microsoft hve-core (Hypervelocity Engineering) workflows for Claude Code: RPI lifecycle, git & PR flows, security/supply-chain/RAI planning, design thinking, and backlog tooling — slash commands and subagents.",
       "category": "workflow"
     }
   ]

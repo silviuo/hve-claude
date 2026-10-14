@@ -1,7 +1,7 @@
 # HVE Commands for Claude Code
 
-Distributed as the `hve` Claude Code plugin (repo: silviuo/hve-claude). Ported from [microsoft/hve-core](https://github.com/microsoft/hve-core) v3.2.2 (MIT) on 2026-09-02.
-HVE ("Hypervelocity Engineering") is Microsoft's agentic SDLC framework built for GitHub Copilot; this port makes its full command set available as Claude Code slash commands, with the same workflows and the same durable artifacts.
+Distributed as the `hve` Claude Code plugin (repo: silviuo/hve-claude). Ported from [microsoft/hve-core](https://github.com/microsoft/hve-core) v3.2.2 (MIT) on 2026-09-02 and re-synced weekly (see [Updating](#updating)).
+HVE ("Hypervelocity Engineering") is Microsoft's agentic SDLC framework built for GitHub Copilot; this port makes its command set available as Claude Code slash commands, with the same workflows and the same durable artifacts.
 
 ## Install
 
@@ -14,13 +14,13 @@ HVE ("Hypervelocity Engineering") is Microsoft's agentic SDLC framework built fo
 
 | Location | Contents |
 |---|---|
-| `commands/` | 80 slash commands — 49 converted from hve prompts, 31 from hve's user-invocable skills |
-| `agents/` | 58 Claude subagents converted from hve `.agent.md` files (planners, reviewers, orchestrator subagents) |
-| `hve/.github/` | Pristine mirror of hve's skills / instructions / prompts / agents trees — commands read their playbooks, references, and templates from here |
+| `commands/` | One slash command per user-invocable hve skill |
+| `agents/` | One Claude subagent per hve `.agent.md` file (planners, reviewers, orchestrators and their subagents) |
+| `hve/.github/` | Pristine mirror of hve's skills / instructions / agents trees — commands read their playbooks, references, and templates from here |
 | `tools/convert_hve.py` | The converter (plugin + user targets; see [Updating](#updating)) |
 | `.copilot-tracking/` *(in your working repo)* | Durable workflow artifacts (research, plans, change logs, reviews) — same convention as upstream |
 
-Installed as a plugin, the commands are available in every repo you open with Claude Code — bare (`/rpi`) when the name is free, and always namespaced (`/hve:rpi`). Artifacts land in the repo you run them from.
+Installed as a plugin, the commands are available in every repo you open with Claude Code — bare (`/rpi-plan`) when the name is free, and always namespaced (`/hve:rpi-plan`). Artifacts land in the repo you run them from.
 
 ## What was changed during conversion
 
@@ -28,8 +28,8 @@ The content is upstream hve-core, with only mechanical adaptations to run outsid
 
 1. **`${input:name}` variables → `$ARGUMENTS`** — Copilot's named-input syntax became a parsing note: commands take space-separated `key=value` pairs; bare text is the primary input.
 2. **`#file:` directives stripped** — Copilot's file-import syntax was replaced with plain paths that Claude reads directly.
-3. **Agent bindings converted** — prompts bound to a Copilot chat agent (e.g. `RPI Agent`, `Security Planner`) now instruct Claude to read and follow the converted spec in `~/.claude/agents/`.
-4. **All cross-references rewritten** — every link between prompts, skills, agents, and instruction files points to its new location; the mirror keeps relative links intact. Includes a fix for two upstream files that share the basename `pull-request.instructions.md`.
+3. **Skills become commands** — every hve skill marked `user-invocable: true` becomes a slash command that reads and follows its `SKILL.md`. Until upstream retired its prompt files in October 2026, prompts were converted into commands too (see [Retired commands](#retired-commands)).
+4. **All cross-references rewritten** — every link between skills, agents, and instruction files points to its new location; the mirror keeps relative links intact. Includes a fix for two upstream files that share the basename `pull-request.instructions.md`.
 5. **Skill-loading adapter notes added** — Copilot auto-loads "skills" by name; Claude does not, so every converted agent and command carries a note pointing to the skill playbooks at `~/.claude/hve/.github/skills/*/<name>/SKILL.md`.
 6. **Copilot chat-only features dropped** — handoff buttons and `disable-model-invocation` flags have no Claude equivalent; the workflows' own "Next Steps" guidance replaces them.
 
@@ -43,26 +43,24 @@ Research → Plan → Implement → Review → Follow-up, with durable artifacts
 
 | Command | Arguments | What it does |
 |---|---|---|
-| `/rpi` | `task=...` `[continue=...]` `[followUp=...]` | Coordinates one task through the whole lifecycle (manual or automatic mode), tracking state, artifacts, and ranked follow-ups |
-| `/rpi-quick` | `[task=...]` `[continue=...]` `[followUp=...]` | Compact full flow: sequences all phases in one command |
-| `/rpi-research` | `[topic=...]` `[chat]` | Research-only: gathers evidence in wider/deeper/contrarian waves, writes a dated artifact under `.copilot-tracking/research/` |
-| `/rpi-plan` | `[task=...]` `[research=...]` `[draft=...]` `[decisions=...]` | Builds an evidence-based implementation plan plus phase details from the research |
-| `/rpi-plan-critique` | `[plan=...]` `[details=...]` `[evidence=...]` | Independent read-only critique of a plan before implementation |
+| `/rpi-research` | `[topic=...]` `[posture=balanced\|focused\|expansive]` `[chat]` | Research-only: gathers evidence in wider/deeper/contrarian waves, writes a dated artifact under `.copilot-tracking/research/` |
+| `/rpi-plan` | `[task=...]` `[research=...]` `[draft=...]` `[decisions=...]` `[critique=standard\|deep\|skip]` | Builds an evidence-based implementation plan plus phase details from the research |
+| `/rpi-plan-critique` | `[plan=...]` `[evidence=...]` `[depth=standard\|deep]` | Independent read-only critique of a plan before implementation |
 | `/rpi-implement` | `[plan=...]` `[phase=...]` `[task=...]` | Executes the approved plan, recording amendments, divergences, and a changes log |
-| `/rpi-review` | `[task=...]` `[plan=...]` `[changes=...]` | Compares plan vs. implementation evidence, records findings, routes follow-up work |
-| `/rpi-walkthrough` | `[target=...]` `[detail=brief\|normal\|deep]` | Guided walkthrough explaining code, features, or `.copilot-tracking` artifacts with evidence links |
-| `/rpi-challenger` | `[subject=...]` `[focus=...]` | Adversarial questioning of a task, decision, plan, or artifact to expose assumptions before acting |
+| `/rpi-review` | `[task=...]` `[plan=...]` `[changes=...]` `[depth=standard\|deep]` | Compares plan vs. implementation evidence, records findings, routes follow-up work |
+| `/rpi-walkthrough` | `[target=...]` `[detail=brief\|normal\|deep]` `[chat]` | Guided walkthrough explaining code, features, or `.copilot-tracking` artifacts with evidence links |
+| `/rpi-challenger` | `[subject=...]` `[artifacts=...]` `[focus=...]` | Adversarial questioning of a task, decision, plan, or artifact to expose assumptions before acting |
+
+For the whole lifecycle with state tracking in one go, use the `rpi-agent` agent (see [Using hve agents](#using-hve-agents)).
 
 ### Git & pull requests
 
 | Command | Arguments | What it does |
 |---|---|---|
-| `/git-commit` | — | Stages all changes, generates a conventional commit message, commits |
-| `/git-commit-message` | — | Generates a conventional commit message from branch changes (no commit) |
-| `/git-merge` | — | Coordinates merge / rebase / `rebase --onto` workflows with conflict handling |
+| `/git-commit` | `[mode=commit\|message-only]` | Stages the paths you choose, confirms the staged set, and creates one Conventional Commit; `mode=message-only` only writes the message |
+| `/git-merge` | `operation=merge\|rebase\|rebase-onto` `branch=<ref>` `[onto=<ref>]` | Coordinates merge / rebase / `rebase --onto` workflows with conflict handling (asks for the branch; no default) |
 | `/git-setup` | — | Interactive, verification-first, non-destructive Git configuration assistant |
-| `/pull-request` | `[branch=origin/main]` `[createPullRequest=false]` | Generates a PR description from branch diffs using the pr-reference workflow |
-| `/pr-review` | `[pr=...]` `[base=...]` `[head=...]` `[scope=...]` | Reviews a PR or local change set via the consolidated Code Review agent |
+| `/pull-request` | `[base=auto]` `[draft=false]` `[action=prepare\|create\|update]` | Drafts or opens a GitHub PR with changed-area preflight checks; Azure DevOps repos are routed to the backlog-management PR protocol |
 | `/pr-reference` | — | Generates PR reference XML: commit history + unified diffs between branches, with filtering |
 
 ### Code review
@@ -71,39 +69,16 @@ Research → Plan → Implement → Review → Follow-up, with durable artifacts
 |---|---|---|
 | `/code-review` | — | Multi-perspective review (functional, security, standards, accessibility, readiness…) with depth tiers and structured findings, fanning out to reviewer subagents |
 
-### Security
+### Security & supply chain
 
 | Command | Arguments | What it does |
 |---|---|---|
-| `/security-review` | `[scope=...]` `[mode=audit\|diff\|plan]` `[targetSkill=owasp-...]` | OWASP vulnerability assessment of the codebase; pick the framework via `targetSkill` |
-| `/security-review-web` | `[scope=...]` | OWASP Top 10 web assessment (no codebase profiling) |
-| `/security-review-llm` | `[scope=...]` | OWASP LLM + Agentic AI vulnerability assessment with codebase profiling |
-| `/security-review-sbd` | `[scope=...]` | Secure by Design assessment per UK/AU government guidance |
-| `/security-capture` | — | Security planning from existing notes (Security Planner, capture mode) |
-| `/security-plan-from-prd` | — | Security planning derived from PRD/BRD artifacts |
 | `/security-planning` | — | Reference set: STRIDE, NIST control families, standards mapping, threat-model (.tm7) generation |
-| `/incident-response` | `[description]` `[severity=1-4]` `[phase=triage\|diagnose\|mitigate\|rca]` | Incident response workflow for Azure operations scenarios |
-| `/risk-register` | `[project-name]` `[focus-area]` | Qualitative risk register using a Probability × Impact matrix |
-
-### Supply chain security & VEX
-
-| Command | Arguments | What it does |
-|---|---|---|
-| `/sssc-capture` | — | Supply chain security planning from existing knowledge (SSSC Planner) |
-| `/sssc-from-prd` / `/sssc-from-brd` | — | Supply chain planning derived from PRD / BRD artifacts |
-| `/sssc-from-security-plan` | — | Extends an existing Security Plan with supply chain coverage |
+| `/incident-response` | `incident-description=...` `[severity=1-4]` `[phase=triage\|diagnose\|mitigate\|rca]` | Incident response workflow for Azure operations scenarios |
+| `/risk-register` | `[project-name=...]` `[focus-area=...]` | Qualitative risk register using a Probability × Impact matrix |
 | `/supply-chain-security` | — | Reference for OpenSSF Scorecard, SLSA, Sigstore, SBOM, posture taxonomies |
-| `/vex-scan` | `[scope=...]` `[product=pkg:...]` | Full VEX pipeline: scan dependencies, enrich CVEs, analyze exploitability, draft OpenVEX |
-| `/vex-triage` | `report=path.json` `[product=...]` | Triage CVEs from an existing scan report or SBOM, skipping the scan |
-| `/vex-implement` | `[scope=...]` `[product=...]` | Plans the backlog to stand up VEX in a target project |
 
-### Responsible AI
-
-| Command | Arguments | What it does |
-|---|---|---|
-| `/rai-capture` | — | Responsible AI assessment planning from existing knowledge |
-| `/rai-plan-from-prd` | — | RAI planning from PRD/BRD artifacts |
-| `/rai-plan-from-security-plan` | — | RAI planning from a completed Security Plan (recommended path) |
+Security reviews, security / supply-chain / Responsible AI planning, and VEX scans run through agents: see [Using hve agents](#using-hve-agents).
 
 ### Project planning & backlog
 
@@ -122,17 +97,12 @@ Research → Plan → Implement → Review → Follow-up, with durable artifacts
 
 | Command | Arguments | What it does |
 |---|---|---|
-| `/dt-start-project` | `project-slug=...` `[context=...]` | Starts a Design Thinking coaching project with persistent state |
-| `/dt-resume-coaching` | `project-slug=...` | Resumes a DT coaching session from saved state |
-| `/dt-method-next` | `[project-slug=...]` | Assesses project state and recommends the next DT method |
-| `/dt-method-04-ideation` / `-04-convergence` | `project-slug=...` | Method 4: divergent ideation, then theme clustering |
-| `/dt-method-05-concepts` / `-05-evaluation` | `project-slug=...` | Method 5: concept articulation, then stakeholder evaluation |
-| `/dt-method-06-planning` / `-06-building` / `-06-testing` | `project-slug=...` | Method 6: prototype approach, scrappy building, hypothesis testing |
-| `/dt-handoff-problem-space` / `-solution-space` / `-implementation-space` | `project-slug=...` | Compiles DT phases into research-ready input for `/rpi-research` |
-| `/dt-canonical-deck` | `[project-slug=...]` `[action=offer\|build\|run]` | Canonical deck snapshots and optional PowerPoint build |
-| `/dt-figma-export` | `project-slug=...` | Exports DT artifacts to FigJam/Figma (needs Figma MCP server) |
+| `/dt-figma-export` | `project-slug=...` `[output-type=figjam\|design\|both]` | Exports DT artifacts to FigJam/Figma (needs Figma MCP server) |
 | `/ux-artifacts` | `[mode=frame-needs\|map-journey\|...]` | Produces evidence-labelled UX needs/journey/structure/handoff artifacts |
 | `/ux-coaching` | `[moment=problem-framing\|critique\|...]` | Coaches through UX problem framing, critiques, stakeholder advocacy |
+| `/demo-setup` | — | Repeatable HVE demo setup: simulates DT Coach sessions with a customer persona and scaffolds a hi-fi prototype |
+
+Design Thinking coaching itself (starting or resuming a project, the methods, space handoffs, the canonical deck) runs through the `dt-coach` agent.
 
 ### Architecture, accessibility & data
 
@@ -141,33 +111,75 @@ Research → Plan → Implement → Review → Follow-up, with durable artifacts
 | `/c4-architecture` | — | C4 model documentation (Context/Container/Component + deployment diagrams) |
 | `/architecture-diagrams` | — | Cloud infrastructure / data-catalog diagrams as ASCII or Mermaid |
 | `/accessibility-coverage-matrix` | `scope=...` `frameworks=wcag-22\|...` `mode=build\|...` | Builds/refreshes an accessibility coverage matrix (WCAG 2.2, ARIA APG, 508…) |
-| `/synth-data-generate` | — | Generates synthetic data with realistic patterns and relationships |
+| `/synth-data-generate` | `subject=...` `[example_data=...]` | Generates synthetic data with realistic patterns and relationships |
 
-### Azure DevOps integration *(needs an ADO MCP server)*
+### Engagement reporting
 
 | Command | Arguments | What it does |
 |---|---|---|
-| `/ado-create-pull-request` | — | Creates an ADO PR with generated description, linked work items, reviewers |
-| `/ado-get-build-info` | — | Retrieves ADO build status and logs for a PR or build number |
+| `/engagement-reporting` | `[report type]` `[reporting period]` | Source-grounded internal or external weekly engagement status reports, with optional Outlook draft |
+| `/engagement-report-council-critique` | `report-date=...` `report-type=...` `draft=...` `research=...` | One independent Council critique of a report draft against research evidence |
 
 ### HVE authoring & testing (meta — for building your own prompts/skills/agents)
 
 | Command | Arguments | What it does |
 |---|---|---|
 | `/hve-builder` | `[targets=...]` `[mode=create\|improve\|refactor\|...]` | Authors, reviews, or validates prompt-engineering artifacts |
-| `/hve-builder-tester` | `[targets=...]` `[profile=high\|medium\|low]` | Black-box behavior testing of artifacts with independent grading |
-| `/prompt-builder` / `/prompt-analyze` / `/prompt-refactor` | `[promptFiles=...]` | Compatibility aliases routing to hve-builder modes |
-| `/vally-tests` / `/vally-test-write` | `[files=...]` | Authors Vally conformance tests incl. jailbreak/injection refusal stimuli |
-| `/evals-import` | `[path=...]` | Imports a CSV/XLSX corpus into Vally eval suites |
+| `/hve-artifact-authoring` | `[targets=...]` `[artifact-type=agent\|prompt\|instruction\|skill]` | Creates and validates HVE-style artifacts with current frontmatter and validation conventions |
+| `/hve-slides` | `[deck=slides/<name>]` `[mode=create\|update\|review]` | Presentation-first HTML slide decks about HVE Core |
+| `/vally-tests` | `[mode=from-artifact\|corpus-import]` `[files=...]` `[path=...]` | Authors Vally conformance tests from an artifact or imports a CSV/XLSX corpus; refuses jailbreak/injection stimuli |
 
 ### Experimental & misc
 
 | Command | Arguments | What it does |
 |---|---|---|
-| `/pptx` | `{action=create\|update\|cleanup\|from-existing}` | Creates or manages PowerPoint decks |
 | `/cspell-config` | — | Creates/updates the project cspell configuration |
-| `/graph-research` | `topic=...` | RPI research over an existing graphify knowledge graph |
 | `/copilot-otel-metrics` | `[local-setup\|local-stack\|org-distribution\|azure-capture]` | Sets up Copilot OpenTelemetry capture with Grafana/Azure dashboards |
+
+---
+
+## Using hve agents
+
+Some hve workflows have no slash command: in Copilot you start them by picking the agent from the agent picker. In Claude Code, ask for the agent in plain words:
+
+- **Interactive agents** (they ask you questions as they go): ask Claude to adopt the agent in the main conversation, for example `Adopt the hve rpi-agent agent and follow its spec: add retry logic to the export service`. Claude reads `agents/rpi-agent.md` and follows it.
+- **Self-contained jobs**: ask Claude to launch the agent as a subagent, for example `Run the hve:security-reviewer agent on src/api in audit mode`.
+
+| Agent | Use it for |
+|---|---|
+| `rpi-agent` | One task through Research → Plan → Implement → Review → Follow-up with persisted state, in manual or automatic mode |
+| `code-review` | Reviewing the PR you name, the open PR for your branch, a branch diff, or local changes |
+| `security-reviewer` | OWASP audits (`mode`, `scope`, `targetSkill`, `plan` inputs); ask for an LLM and agentic, web application, or Secure by Design review |
+| `security-planner` | Security planning from existing notes (`capture`) or from a PRD/BRD (`from-prd`) |
+| `sssc-planner` | Supply chain security planning from nothing, a PRD, a BRD, or a completed security plan; VEX stand-up planning |
+| `sssc-reviewer` | VEX scans (`scope`, `product`) and triage of an existing Trivy, OSV-Scanner, or SPDX report (`report=<path>`) |
+| `rai-planner` | Responsible AI assessment planning from nothing, a PRD/BRD, or a completed security plan |
+| `dt-coach` | Design Thinking coaching: start or resume a project, the next method, methods 4–6, space handoffs to RPI, the canonical deck |
+| `pptx` | Creating, updating, or managing PowerPoint decks |
+
+All agents, including the reviewer and assessor subagents these orchestrators launch, are in `agents/`.
+
+## Retired commands
+
+Upstream hve-core retired all of its prompt files on 2026-10-07 ([microsoft/hve-core#3111](https://github.com/microsoft/hve-core/pull/3111)), so the commands converted from them left this plugin with the first sync after that (v3.2.8). Upstream's replacement for each, from its [migration guide](https://github.com/microsoft/hve-core/blob/main/docs/getting-started/package-migration.md#retired-prompt-commands):
+
+| Retired command | Use instead |
+|---|---|
+| `/rpi` | The `rpi-agent` agent; describe the task. Or run the phases yourself with `/rpi-research` → `/rpi-plan` → `/rpi-implement` → `/rpi-review` |
+| `/pr-review` | The `code-review` agent |
+| `/git-commit-message` | `/git-commit mode=message-only` |
+| `/ado-create-pull-request` | `/pull-request action=create` (routes Azure DevOps repos to the backlog-management PR protocol) |
+| `/ado-get-build-info` | Ask for the build status; the `backlog-management` skill carries the Azure DevOps build reference |
+| `/vally-test-write` | `/vally-tests mode=from-artifact files=<path>` |
+| `/evals-import` | `/vally-tests mode=corpus-import path=<corpus>` |
+| `/prompt-builder` / `/prompt-analyze` / `/prompt-refactor` | `/hve-builder` in create/improve, review, or refactor mode |
+| `/security-review`, `/security-review-llm`, `/security-review-web`, `/security-review-sbd` | The `security-reviewer` agent; ask for the kind of review |
+| `/security-capture`, `/security-plan-from-prd` | The `security-planner` agent; start without a PRD/BRD, or point it at one |
+| `/sssc-capture`, `/sssc-from-prd`, `/sssc-from-brd`, `/sssc-from-security-plan`, `/vex-implement` | The `sssc-planner` agent; say which input to start from, or ask it to plan VEX |
+| `/vex-scan`, `/vex-triage` | The `sssc-reviewer` agent; ask for a VEX scan, or to triage an existing report |
+| `/rai-capture`, `/rai-plan-from-prd`, `/rai-plan-from-security-plan` | The `rai-planner` agent; say which input to start from |
+| `/dt-start-project`, `/dt-resume-coaching`, `/dt-method-*`, `/dt-handoff-*`, `/dt-canonical-deck` | The `dt-coach` agent; describe what you want |
+| `/pptx` | The `pptx` agent |
 
 ---
 
@@ -178,10 +190,10 @@ Research → Plan → Implement → Review → Follow-up, with durable artifacts
 All commands take space-separated `key=value` pairs; bare text without `key=` is the primary input:
 
 ```
-/rpi task=add retry logic to the export service
 /rpi-research topic=how OptosysCloud handles auth token refresh
-/security-review scope=src/api mode=audit targetSkill=owasp-top-10
-/vex-scan scope=. product=pkg:npm/@myorg/myapp
+/rpi-plan task=add retry logic to the export service
+/git-merge operation=rebase branch=origin/main
+/backlog-plan triage
 ```
 
 ### The RPI loop (recommended daily driver)
@@ -197,8 +209,7 @@ All commands take space-separated `key=value` pairs; bare text without `key=` is
 /rpi-review                                      # verify vs plan, route follow-ups
 ```
 
-- One-shot instead: `/rpi-quick task=...` (all phases, one command).
-- Coordinated with state tracking: `/rpi task=...`, resume later with `/rpi continue=yes`, pick a review follow-up with `/rpi followUp=1`.
+- Coordinated with state tracking instead: the `rpi-agent` agent (see [Using hve agents](#using-hve-agents)); ask it to resume and it continues from its recorded phase.
 - `/clear` between phases is the intended pattern — each phase reads the previous phase's artifact, not the chat history.
 - Understand unfamiliar code first: `/rpi-walkthrough target=src/billing detail=deep`.
 - Stress-test a decision before building: `/rpi-challenger subject=<the plan or assumption>`.
@@ -207,14 +218,14 @@ All commands take space-separated `key=value` pairs; bare text without `key=` is
 
 | Goal | Flow |
 |---|---|
-| Commit my work properly | `/git-commit` (or `/git-commit-message` to review first) |
-| Open a PR | `/pull-request branch=origin/main` → review body → push/create |
-| Review a PR | `/pr-review pr=123` or `/code-review` for local changes |
-| Security audit | `/security-review scope=src` → findings → `/rpi task=fix <finding>` |
-| CVE / SBOM triage | `/vex-scan product=pkg:npm/...` → review drafted OpenVEX |
+| Commit my work properly | `/git-commit` (or `/git-commit mode=message-only` to review the message first) |
+| Open a PR | `/pull-request action=prepare` → review body → `/pull-request action=create` |
+| Review a PR | The `code-review` agent with the PR number, or `/code-review` for local changes |
+| Security audit | The `security-reviewer` agent on `src` → findings → `/rpi-plan task=fix <finding>` |
+| CVE / SBOM triage | The `sssc-reviewer` agent: VEX scan with `product=pkg:npm/...` → review drafted OpenVEX |
 | PRD → backlog | `/functional-planner <prd path> platform=ado` → `/backlog-execute run <handoff> --dry-run` |
 | Plan performance/SLOs | `/performance-slo-planner journeys=<critical flows>` |
-| Idea → build | `/dt-start-project project-slug=x` → dt methods → `/dt-handoff-solution-space` → `/rpi` |
+| Idea → build | The `dt-coach` agent: start a project → methods → solution-space handoff → `/rpi-research` |
 
 ### Where things end up
 
@@ -226,8 +237,8 @@ All commands take space-separated `key=value` pairs; bare text without `key=` is
 
 ### Gotchas
 
-- **Name collisions**: `/code-review` and `/security-review` also exist as Claude Code built-in skills. The plugin versions are always reachable namespaced: `/hve:code-review`, `/hve:security-review`. A user-level command with the same bare name shadows the plugin's bare name too.
-- **Integrations**: `/ado-*`, `/jira`, `/dt-figma-export`, and Mural-related flows expect the matching MCP server to be connected, exactly as they would in Copilot.
+- **Name collisions**: `/code-review` also exists as a Claude Code built-in skill. The plugin version is always reachable namespaced: `/hve:code-review`. A user-level command with the same bare name shadows the plugin's bare name too.
+- **Integrations**: Azure DevOps flows (`/pull-request` on ADO repos, `/backlog-*` with `platform=ado`), `/jira`, `/dt-figma-export`, and Mural-related flows expect the matching MCP server to be connected, exactly as they would in Copilot.
 - **New commands need a fresh session** — an already-open session won't see newly added command files.
 - The mirror at `~/.claude/hve/` is generated — don't hand-edit it; changes will be lost on re-sync.
 

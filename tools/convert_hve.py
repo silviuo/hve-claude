@@ -116,8 +116,11 @@ if args.target == "plugin":
         if (DST / sub).exists():
             shutil.rmtree(DST / sub)
 HVE.mkdir(parents=True, exist_ok=True)
+# Copy each subtree only if present: upstream retired .github/prompts/ on 2026-10-07
+# (microsoft/hve-core#3111), so commands now come only from user-invocable skills.
 for sub in ["skills", "instructions", "agents", "prompts"]:
-    shutil.copytree(SRC / ".github" / sub, HVE / ".github" / sub)
+    if (SRC / ".github" / sub).is_dir():
+        shutil.copytree(SRC / ".github" / sub, HVE / ".github" / sub)
 for sub in ["security", "rpi"]:
     shutil.copytree(SRC / "docs" / sub, HVE / "docs" / sub)
 for f in ["CODE_OF_CONDUCT.md", "LICENSE", "TRANSPARENCY-NOTE.md"]:
@@ -129,7 +132,8 @@ for f in ["CODE_OF_CONDUCT.md", "LICENSE", "TRANSPARENCY-NOTE.md"]:
 
 # ---------------------------------------------------------------- build maps
 agent_files = sorted((SRC / ".github/agents").rglob("*.agent.md"))
-prompt_files = sorted((SRC / ".github/prompts").rglob("*.prompt.md"))
+prompt_files = sorted((SRC / ".github/prompts").rglob("*.prompt.md")) \
+    if (SRC / ".github/prompts").is_dir() else []  # absent since upstream #3111
 skill_files = sorted((SRC / ".github/skills").rglob("SKILL.md"))
 instr_files = sorted((SRC / ".github/instructions").rglob("*.instructions.md"))
 
