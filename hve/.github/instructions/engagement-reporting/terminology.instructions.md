@@ -1,7 +1,7 @@
 ---
 description: >-
   Correct spellings and naming conventions for people, products, and teams
-applyTo: "**/${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/prompts/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/engagement-reporting/**, **/engagement.yaml"
+applyTo: "**/${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/engagement-reporting/**, **/engagement.yaml"
 ---
 
 # Terminology

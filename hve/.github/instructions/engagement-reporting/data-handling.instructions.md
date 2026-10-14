@@ -1,6 +1,6 @@
 ---
 description: "Protects sensitive engagement sources, working files, reports, transcripts, and configuration."
-applyTo: "**/${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/prompts/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/engagement-reporting/**, **/engagement.yaml"
+applyTo: "**/${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/engagement-reporting/**, **/engagement.yaml"
 ---
 
 # Engagement Reporting Data Handling

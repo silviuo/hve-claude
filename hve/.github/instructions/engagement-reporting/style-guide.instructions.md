@@ -1,6 +1,6 @@
 ---
 description: Formatting, tone, and language rules for engagement reports
-applyTo: "**/${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/prompts/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/engagement-reporting/**"
+applyTo: "**/${CLAUDE_PLUGIN_ROOT}/hve/.github/agents/engagement-reporting/**, **/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/engagement-reporting/**"
 ---
 
 # Style Guide

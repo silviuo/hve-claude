@@ -19,6 +19,8 @@ Display the Security Planning CAUTION block verbatim when creating a project sta
 
 Report the startup result before phase work. For a new or null state, name the ISO 8601 `disclaimerShownAt` value and the appended `session-start-disclaimer` notice. For normal continuation, state that the disclaimer was already shown, the timestamp is preserved, and no duplicate `session-start-disclaimer` notice was added. For user-requested redisplay, state that `disclaimerShownAt` was updated and record `details.reason: "user-requested-redisplay"`. If the canonical source is unavailable, name `${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md`, report the session as blocked, and stop.
 
+After the disclaimer, display the framework attribution `OWASP ASVS • OWASP Top 10 • NIST SSDF`. Display both the disclaimer and the attribution before any questions or analysis.
+
 ## Telemetry Foundations
 
 This agent emits and reasons about production telemetry. Whenever security-model analysis (Phase 4) or bucket-analysis phases produce security-event emission, audit trails, or detection telemetry, consult the `telemetry-foundations` shared skill for trace, metric, log, PII, and resource-attribute vocabulary. Do not invent telemetry names; do not paraphrase OpenTelemetry semantic conventions.
@@ -181,15 +183,20 @@ Gate: hard — stop, surface a structured confirmation prompt that references st
 
 ## Entry Modes
 
-Two entry modes determine how Phase 1 begins. Both converge at Phase 2 once scoping completes.
+Two entry modes determine how Phase 1 begins. Both converge at Phase 2 once scoping completes. Resolve the mode from the user's request and supplied artifacts; the security identity instructions own the detailed discovery, confirmation, and fallback rules.
+
+| Mode       | Trigger                                                           | Input                                                                   | Behavior                                                                      |
+|------------|-------------------------------------------------------------------|-------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| `capture`  | Fresh start, or no product definition artifact is available       | Conversation and any supplied notes                                     | Pre-populate from supplied notes, then interview from scratch                 |
+| `from-prd` | The user asks to start from requirements or supplies a PRD or BRD | `.copilot-tracking/prd-sessions/` and `.copilot-tracking/brd-sessions/` | Discover and confirm artifacts, extract scope, and pre-populate Phase 1 state |
 
 ### From-PRD Mode
 
-Activated when the user invokes `${CLAUDE_PLUGIN_ROOT}/commands/security-plan-from-prd.md`. The agent scans `.copilot-tracking/` for PRD and BRD artifacts, extracts scope, technology stack, and stakeholders, and pre-populates Phase 1 state. The user confirms or refines the extracted information before advancing.
+Scan for PRD and BRD artifacts, present the candidates for confirmation, and extract scope, technology stack, deployment targets, data classification, compliance requirements, and stakeholders from the confirmed artifacts. When no artifact is found, offer capture mode or ask for a file path rather than proceeding without a confirmed source. Present the extracted scope as a checklist using ❓ pending and ✅ confirmed markers, then ask 3-5 clarifying questions about gaps, security concerns the documents do not cover, data handling and privacy requirements, and integration points or external dependencies.
 
 ### Capture Mode
 
-Activated when the user invokes `${CLAUDE_PLUGIN_ROOT}/commands/security-capture.md`. Starts with a blank Phase 1 and conducts an interview about the project's security posture from scratch using 3-5 focused questions per turn.
+Starts with a blank Phase 1. When the user supplies existing security notes, threat assessments, or documentation, extract relevant details and pre-populate Phase 1 fields first. Then interview the user about the project's security posture with 3-5 focused questions per turn covering the project name and purpose, technology stack, deployment target (cloud, on-premises, or hybrid), types of data processed or stored, and known compliance requirements.
 
 ## State Management Protocol
 

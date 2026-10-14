@@ -1,5 +1,6 @@
 ---
 description: "Authors Vally conformance tests for prompts, instructions, agents, and skills, and refuses jailbreak, prompt-injection, harmful-elicitation, TOS, CoC, and PII-extraction stimuli"
+argument-hint: "[mode={from-artifact|corpus-import}] [files=...] [path=...] [kind={auto|prompt|instructions|agent|skill}]"
 ---
 
 Execute the HVE skill **vally-tests**.

@@ -2,8 +2,12 @@
 title: Security Documentation
 description: Index of security documentation including security model and assurance case for HVE Core
 sidebar_position: 1
+sidebar_label: Overview
+sidebar_custom_props:
+  accessibleName: "Overview: Security Documentation"
+pagination_label: Security Documentation
 author: Microsoft
-ms.date: 2026-10-02
+ms.date: 2026-10-04
 ms.topic: overview
 keywords:
   - security
@@ -20,14 +24,14 @@ This directory contains security documentation for HVE Core, demonstrating defen
 
 | Document                                                                   | Description                                                                                                               |
 |----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [Security Model](security-model.md)                                        | Comprehensive security model and security assurance case                                                                  |
 | [Branch Protection](branch-protection.md)                                  | Main branch protection requirements and repository controls                                                               |
-| [Code-Scanning Alert Lifecycle](code-scanning-alert-lifecycle.md)          | How code-scanning alerts are detected, blocked, tracked, and resolved without dismissal                                   |
+| [Security Model](security-model.md)                                        | Comprehensive security model and security assurance case                                                                  |
 | [Dependency Pinning](dependency-pinning.md)                                | Pinning strategies and CI enforcement for all dependency types                                                            |
 | [SBOM Verification](sbom-verification.md)                                  | SBOM attestation verification and consumption guide                                                                       |
 | [VEX Verification](vex-verification.md)                                    | Download, verify, and interpret the published OpenVEX document                                                            |
 | [Fuzzing](fuzzing.md)                                                      | OSSF Scorecard fuzz harness convention and compliance                                                                     |
 | [Dangerous Workflow Detection](dangerous-workflow-detection.md)            | Hybrid CI control: a homegrown template-injection gate plus the Poutine supply-chain scanner for GitHub Actions workflows |
+| [Code-Scanning Alert Lifecycle](code-scanning-alert-lifecycle.md)          | How code-scanning alerts are detected, blocked, tracked, and resolved without dismissal                                   |
 | [SECURITY.md](https://github.com/microsoft/hve-core/blob/main/SECURITY.md) | Vulnerability disclosure and reporting process                                                                            |
 
 ## Skill Security Models
@@ -49,6 +53,7 @@ Skills whose shipped scripts make network requests, handle credentials, parse co
 | **security-planning**                   | Local Python generator; native TMT validation harness; Windows UI Automation; screenshot capture; overlay and evidence handling                                   | [SECURITY.md](https://github.com/microsoft/hve-core/blob/main/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/project-planning/security-planning/SECURITY.md) |
 | **vex**                                 | Local Python gate; untrusted issue-body + OpenVEX doc parsing                                                                                                     | [SECURITY.md](https://github.com/microsoft/hve-core/blob/main/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/security/vex/SECURITY.md)                       |
 | **hve-core-installer**                  | Local PowerShell + Bash file copy into a target repository; `jq`, `git`, VS Code CLI subprocesses                                                                 | [SECURITY.md](https://github.com/microsoft/hve-core/blob/main/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/installer/hve-core-installer/SECURITY.md)       |
+| **hve-demo-material** (experimental)    | GitHub REST and Pages client with `GITHUB_TOKEN`; deck and video render writes; `node`, `npm`, `ffmpeg`, `git` subprocesses                                       | [SECURITY.md](https://github.com/microsoft/hve-core/blob/main/${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/experimental/hve-demo-material/SECURITY.md)     |
 
 ## Security Posture
 

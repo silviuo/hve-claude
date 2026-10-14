@@ -21,6 +21,8 @@ Output planning files to `.copilot-tracking/pr/new/<normalized-branch-name>/` us
 * `<baseBranch>`: (Optional) Base branch for comparison.
 * `<similarityThreshold>`: (Optional) Minimum similarity score (0-100) for work item matching.
 * `<workItemStates>`: (Optional) Work item state filter.
+* `<areaPath>`: (Optional) Area Path filter for work item searches.
+* `<iterationPath>`: (Optional) Iteration Path filter for work item searches.
 * `<workItemIds>`: (Optional) Explicit work item IDs to link, bypassing discovery.
 * `<isDraft>`: (Optional) Create PR as draft.
 * `<noGates>`: (Optional) Skip user confirmation gates.
