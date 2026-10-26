@@ -1,5 +1,5 @@
 ---
-description: "Drafts or opens a GitHub pull request, runs changed-area preflight checks, and commits validated preflight repairs, and routes Azure DevOps repositories to the backlog-management pull request protocol. Use when a user asks to prepare, create, or update a pull request on GitHub or Azure DevOps."
+description: "Prepare, create, or update a GitHub pull request with targeted preflight, repair commits, scoped push consent, and separate PR-write approval. Route Azure DevOps to backlog-management."
 argument-hint: "[base=auto] [draft=false] [action=prepare|create|update]"
 ---
 

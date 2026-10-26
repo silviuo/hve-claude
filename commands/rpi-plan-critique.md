@@ -1,6 +1,6 @@
 ---
 description: "Independently assess an RPI plan without editing it. Use when an implementation-ready plan needs a credibility check or a revised plan needs its earlier findings reconciled."
-argument-hint: "[plan=...] [evidence=...] [output=...] [depth={standard|deep}] [prior=...]"
+argument-hint: "[plan=...] [evidence=...] [output=...] [depth={standard|deep}] [effort={auto|low|medium|high|xhigh|max}] [subagents={auto|none}] [prior=...]"
 ---
 
 Execute the HVE skill **rpi-plan-critique**.

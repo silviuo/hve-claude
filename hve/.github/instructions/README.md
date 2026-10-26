@@ -2,7 +2,7 @@
 title: GitHub Copilot Instructions
 description: Repository-specific coding guidelines and conventions for GitHub Copilot
 author: HVE Core Team
-ms.date: 2026-10-07
+ms.date: 2026-10-22
 ms.topic: reference
 keywords:
   - copilot
@@ -60,11 +60,11 @@ See [Contributing Instructions](../../docs/contributing/instructions.md) for aut
 
 ### Git and Workflow
 
-| File                                                                               | Applies To                   | Purpose                              |
-|------------------------------------------------------------------------------------|------------------------------|--------------------------------------|
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md) | Commit actions               | Conventional commit message format   |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md)           | Git operations               | Merge, rebase, and conflict handling |
-| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md)                       | `**/.copilot-tracking/pr/**` | HVE Core pull request conventions    |
+| File                                                                               | Applies To                   | Purpose                                                                           |
+|------------------------------------------------------------------------------------|------------------------------|-----------------------------------------------------------------------------------|
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/commit-message.instructions.md) | Commit actions               | Conventional commit message format                                                |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/hve-core/git-merge.instructions.md)           | Git operations               | Integration, ordinary-push authorization, account changes, and execution evidence |
+| [${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md](${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/pull-request.instructions.md)                       | `**/.copilot-tracking/pr/**` | HVE Core pull request conventions                                                 |
 
 ### Repository Workflow
 

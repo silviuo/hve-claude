@@ -1,6 +1,6 @@
 ---
 description: "Follow an approved RPI plan, keep it current as new information comes to light, check off completed work, and keep a condensed changes log. Use when implementation is ready to begin or resume."
-argument-hint: "[plan=...] [phase=...] [task=...]"
+argument-hint: "[plan=...] [phase=...] [task=...] [subagents={auto|none}]"
 ---
 
 Execute the HVE skill **rpi-implement**.
