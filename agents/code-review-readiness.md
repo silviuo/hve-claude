@@ -15,7 +15,7 @@ This perspective is the home for the general, non-code review surface that is no
 
 ## Skill Reference Contract
 
-At the start of the run, locate the skill named `code-review` and read these files from it once in a single parallel `read_file` block (paths are relative to that skill), then apply them verbatim:
+At the start of the run, locate the skill named `code-review` and read these files from it once, in a single batch of parallel reads (paths are relative to that skill), then apply them verbatim:
 
 * `SKILL.md` (skill entrypoint)
 * `references/lens-checklists.md` (Readiness review section)

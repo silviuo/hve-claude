@@ -1,6 +1,6 @@
 ---
-description: "Create and validate HVE Core agents, prompts, instructions, and skills with current frontmatter, package membership, delegation, tracking, documentation, and validation conventions. Use when authoring a GitHub Copilot customization artifact in this repository."
-argument-hint: "[targets=...] [artifact-type=agent|prompt|instruction|skill] [requirements=...]"
+description: "Create and validate HVE Core agents, instructions, and skills with current frontmatter, package membership, delegation, tracking, documentation, and validation conventions. Use when authoring a GitHub Copilot customization artifact in this repository."
+argument-hint: "[targets=...] [artifact-type=agent|instruction|skill] [requirements=...]"
 ---
 
 Execute the HVE skill **hve-artifact-authoring**.

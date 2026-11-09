@@ -19,8 +19,8 @@ agent_environment:
   files:
     - src: ${CLAUDE_PLUGIN_ROOT}/agents/security-planner.md
       dest: .github/copilot-instructions.md
-    - src: ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md
-      dest: ${CLAUDE_PLUGIN_ROOT}/hve/${CLAUDE_PLUGIN_ROOT}/hve/.github/instructions/shared/disclaimer-language.instructions.md
+    - src: ../../${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/shared/disclaimer-language/SKILL.md
+      dest: ${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/shared/disclaimer-language/SKILL.md
   skills:
     - ../../${CLAUDE_PLUGIN_ROOT}/hve/.github/skills/project-planning/security-planning
 ```
